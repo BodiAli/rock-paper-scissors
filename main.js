@@ -1,76 +1,121 @@
-function getComputerChoice() {
-  let randomNumber = Math.floor(Math.random() * 3) + 1;
-  if (randomNumber == 1) {
-    return "Rock";
-  } else if (randomNumber == 2) {
-    return "Paper";
-  } else {
-    return "Scissors";
-  }
-}
-function getPlayerSelection() {
-  let playerSelection = prompt("Choose Rock, Paper, or Scissors");
-  if (playerSelection === null) {
-    alert("You Canceled The Game");
-    return null;
-  }
-  playerSelection = playerSelection.toLowerCase();
-  playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1);
-  if (playerSelection == "Rock" || playerSelection == "Paper" || playerSelection == "Scissors") {
-    return playerSelection;
-  } else {
-    alert("Please choose Rock, Paper, or scissors");
-    return getPlayerSelection();
-  }
-}
-function compareAnswers(playerChoice, computerChoice) {
-  if (playerChoice === null) {
-    return null;
-  } else if (playerChoice == computerChoice) {
-    return `You choose ${playerChoice} and computer choose ${computerChoice}, it's a Tie!`;
-  } else if (
-    (playerChoice == "Rock" && computerChoice == "Scissors") ||
-    (playerChoice == "Paper" && computerChoice == "Rock") ||
-    (playerChoice == "Scissors" && computerChoice == "Paper")
-  ) {
-    return `You Win! ${playerChoice} beats ${computerChoice}`;
-  } else {
-    return `You Lose! ${computerChoice} beats ${playerChoice}`;
-  }
-}
-function game() {
-  let playerWins = 0;
-  let computerWins = 0;
+document.addEventListener("DOMContentLoaded", function () {
+  const rockElement = document.querySelector(".rock");
+  const paperElement = document.querySelector(".paper");
+  const scissorsElement = document.querySelector(".scissors");
+  const h2Element = document.querySelector(".output h2");
+  const scoreElement = document.querySelector(".score");
+  const winnerMessage = document.querySelector(".winner-message");
+  const playAgainParagraph = document.querySelector(".play-again");
+  const playAgainButton = document.querySelector("#play-again-button");
+  const weaponChoice = document.querySelector(".weapon-result");
+  const result = document.querySelector(".game-result");
+
+
+  playAgainParagraph.style.display = "none";
+
+  h2Element.style.marginBottom = "-80px";
+  let userScore = 0;
+  let computerScore = 0;
+  const winningScore = 5;
+  let gameOver = false;
+
+  rockElement.addEventListener("click", function () {
+    if (!gameOver) playGame("rock");
+  });
+
+  paperElement.addEventListener("click", function () {
+    if (!gameOver) playGame("paper");
+  });
+
+  scissorsElement.addEventListener("click", function () {
+    if (!gameOver) playGame("scissors");
+  });
+
+  playAgainButton.addEventListener("click", function () {
+    resetGame();
+    playAgainButton.blur();
+  });
+
+  function playGame(userChoice) {
+    if (gameOver) return;
   
-  for (let round = 1; round <=5; round++) {
-    console.log(`Round ${round}:`);
-    playerChoice = getPlayerSelection();
-    if (playerChoice == null) {
-      console.log("You Canceled The Game!");
-      break;
+    const computerChoice = getComputerChoice();
+    const weaponChoice = document.querySelector(".weapon-result");
+    const result = document.querySelector(".game-result");
+    const roundResult = determineWinner(userChoice, computerChoice);
+  
+    weaponChoice.textContent = `You choose ${userChoice}, computer chooses ${computerChoice}`;
+    result.textContent = roundResult;
+  
+    h2Element.style.marginBottom = "0";
+  
+    if (roundResult.includes("Win")) {
+      userScore++;
+    } else if (roundResult.includes("Lose")) {
+      computerScore++;
     }
-    computerChoice = getComputerChoice();
-    let result = compareAnswers(playerChoice, computerChoice);
-    console.log(`Computer: ${computerChoice}`);
-    console.log(`You: ${playerChoice}`);
-    console.log(result);
-    if (result.includes("Win")) {
-      playerWins++;
-    } else if (result.includes("Lose")) {
-      computerWins++;
+  
+    scoreElement.textContent = `Score: You ${userScore} - ${computerScore} Computer`;
+  
+    if (userScore === winningScore || computerScore === winningScore) {
+      announceWinner();
+      playAgainParagraph.style.display = "block";
+      gameOver = true;
+    }
+  
+ 
+    const clickedButton = document.querySelector(`.${userChoice} img`);
+    clickedButton.classList.add("clicked");
+  
+    setTimeout(() => {
+      clickedButton.classList.remove("clicked");
+    }, 200);
+  }
+  
+
+  function resetGame() {
+    gameOver = false;
+    userScore = 0;
+    computerScore = 0;
+    h2Element.style.marginBottom = "-100px";
+    scoreElement.textContent = "";
+    winnerMessage.textContent = "";
+    weaponChoice.textContent = ""; 
+    result.textContent = "";
+    playAgainParagraph.style.display = "none";
+  }
+    
+
+  function getComputerChoice() {
+    let randomNumber = Math.floor(Math.random() * 3) + 1;
+    if (randomNumber === 1) {
+      return "rock";
+    } else if (randomNumber === 2) {
+      return "paper";
+    } else {
+      return "scissors";
     }
   }
-  if (playerChoice == null) {
-    console.log("To start the game press CTRL + R");
-  } else if (playerWins > computerWins) {
-    console.log(`You win the game with ${playerWins} out of 5 rounds!`);
-    console.log("To restart the game press CTRL + R");
-  } else if (computerWins > playerWins) {
-    console.log(`You lose the game with ${computerWins} out 5 rounds!`);
-    console.log("To restart the game press CTRL + R");
-  } else {
-    console.log("The game is a tie!");
-    console.log("To restart the game press CTRL + R");
+
+  function determineWinner(userChoice, computerChoice) {
+    if (userChoice === computerChoice) {
+      return "The Game Is A Tie!";
+    } else if (
+      (userChoice === "rock" && computerChoice === "scissors") ||
+      (userChoice === "paper" && computerChoice === "rock") ||
+      (userChoice === "scissors" && computerChoice === "paper")
+    ) {
+      return `You Win! ${userChoice} beats ${computerChoice}`;
+    } else {
+      return `You Lose! ${computerChoice} beats ${userChoice}`;
+    }
   }
-}
-game()
+
+  function announceWinner() {
+    if (userScore === winningScore) {
+      winnerMessage.textContent = "Congratulations! You are the overall winner!";
+    } else {
+      winnerMessage.textContent = "Sorry, the computer is the overall winner. Try again!";
+    }
+  }
+});

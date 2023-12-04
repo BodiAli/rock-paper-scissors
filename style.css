@@ -1,0 +1,131 @@
+body {
+  background-color: black;
+}
+.header {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 1270px;
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  box-shadow: 1px 1px 2px white;
+  color: rgba(0, 255, 255, 0.768);
+}
+h1 {
+  margin-left: 20px;
+  text-shadow: 0px 0px 5px white;
+  font-size: 40px;
+}
+h3 {
+  margin-right: 20px;
+  text-shadow: 0px 0px 10px white;
+  color: black;
+}
+.play-again {
+  margin: 0;
+  margin-top: 20px;
+}
+
+.play-again button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 0 0 5px white;
+  background-color: darkslategray;
+  font-size: large;
+  font-weight: bold;
+}
+
+.play-again button:active {
+  transform: scale(0.9);
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 35px;
+  text-shadow: 0px 0px 15px white;
+}
+.weapon-result {
+  font-size: 25px;
+  margin: 0;
+}
+.game-result {
+  font-size: 22px;
+  margin: 0;
+}
+.score {
+  font-size: 20px;
+  margin: 0;
+}
+.winner-message {
+  font-size: 25px;
+  margin: 0;
+  margin-bottom: 20px;
+}
+.output {
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+.game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: 170px;
+  box-shadow: 0px 0px 10px white;
+  width: 610px;
+  margin: 0 auto 150px auto;
+  border-radius: 30%;
+  margin-top: 50px;
+}
+
+.game img {
+  transition: transform 0.2s ease-in-out;
+}
+
+.game img:hover {
+  transform: scale(1.1);
+}
+
+.rockimg {
+  width: 190px;
+  height: 200px;
+}
+.paperimg {
+  width: 150px;
+  height: 120px;
+}
+.scissorsimg {
+  width: 140px;
+  height: 120px;
+}
+
+.game img {
+  transition: transform 0.2s ease-in-out;
+}
+
+.game img:hover {
+  transform: scale(1.1);
+}
+
+.game img.clicked {
+  animation: clickAnimation 0.2s ease-in-out;
+}
+
+@keyframes clickAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

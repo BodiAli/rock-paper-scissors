@@ -1,5 +1,0 @@
-# generate a random choice from the computer between Rock, Paper, or scissors
-# make the user select his choice of rock or paper or scissors
-# compare each choice and make sure the computer knows what beats what and also make sure that the function is    made to be used again to track the score of each win or loss
-# create a function that tracks the score of the player and the computer then declare the winner
-# be careful if the user cancels the prompt

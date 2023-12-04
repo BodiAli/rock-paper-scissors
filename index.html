@@ -3,9 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="background.css">
   <title>Document</title>
 </head>
 <body>
+  <div class="ag-sparks">
+    <div class="ag-spark"></div>
+    <div class="ag-content">
+      <div class="header">
+        <h1>Intense Rock-Paper-Scissors</h1>
+        <h3>Made by Bodi Ali</h3>
+      </div>
+      <div class="output">
+        <p class="play-again" style="display: none;">
+          <button id="play-again-button">Play Again</button>
+        </p>
+        <h2>Choose Your Weapon:</h2>
+        <p class="weapon-result"></p>
+        <p class="game-result"></p>
+        <p class="score"></p>
+        <p class="winner-message"></p>
+      </div>
+      <div class="game">
+        <div class="rock"><img class="rockimg" src="./images/rock.png" alt="rock icon"></div>
+        <div class="paper"><img class="paperimg" src="./images/paper.png" alt="paper icon"></div>
+        <div class="scissors"><img class="scissorsimg" src="./images/scissors.png" alt="scissors icon"></div>
+      </div>
+    </div>
+    <div class="ag-lightning"></div>
+  </div>
   <script src="main.js"></script>
 </body>
 </html>
